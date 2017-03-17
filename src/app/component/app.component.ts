@@ -1,53 +1,52 @@
 import { Component } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
 import { Operation } from '../operation.class';
 import { StreamWrapper } from '../stream-wrapper.class';
 import { StreamService } from '../services/stream.service';
 
 @Component({
     selector: 'app-root',
+    styleUrls: ['./app.component.css'],
     template: `
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>Streams (only cold streams)</h2>
-                    <input type="number" class="form-control" [(ngModel)]="animationTime">
+        <div class="app-wrapper">
+            <div class="app-wrapper-top">
+                <div class="streams-ascii">
+                    <h2>Create streams in ASCII (only cold streams)</h2>
+                    <strong>Create your ascii diagrams:</strong>
                     <textarea class="form-control" [(ngModel)]="asciiStr" (keyup)="changed()"></textarea>
-                    <table class="table table-hover table-striped">
-                        <tr *ngFor="let wrapper of streamWrappers">
-                            <td>{{wrapper.name}}</td> 
-                            <td style="width: 100%">
-                                <stream-row [stream]="wrapper.stream" [interval]="animationTime" [active]="active"></stream-row>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr *ngFor="let operation of operations; let i = index">
-                            <td>r$</td>
-                            <td style="width: 100%">
-                                <stream-row [stream]="operation.stream" [active]="active" [interval]="animationTime"></stream-row>
-                            </td>
-                            <td>
-                                <pre>{{operation.code}}</pre>
-                                <button class="btn btn-danger btn-sm" (click)="removeOperation(operation)"><i class="fa fa-trash-o"></i></button>
-                                <button class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
-                            </td>
-                        </tr>
-                    </table>
-                    
                 </div>
-                <div class="col-sm-12">
-                <br/>
-                    <button class="btn btn-primary" (click)="start()">Start</button>
-                    <button class="btn btn-default" (click)="stop()">Stop</button>
+                <div class="streams-settings">
+                    <h2>Control panel</h2>
+                    <strong>Interval:</strong>
+                    <input type="number" class="form-control" [(ngModel)]="animationTime">
+                    <br/>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" (click)="start()"><i class="fa fa-play"></i>&nbsp;Start</button>
+                        <button class="btn btn-danger" (click)="stop()"><i class="fa fa-stop"></i>&nbsp;Stop</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-sm-offset-6">
-                <h2>Add a new operation</h2>
-                <blockquote>The stream at your left is called <strong>obs$</strong>, use some operations to visualize the
-                    changes
-                </blockquote>
+            <div class="app-wrapper-streams">
+                <div class="stream-wrapper" *ngFor="let wrapper of streamWrappers">
+                    <span class="stream-name">{{wrapper.name}}:</span>
+                    <stream-row [stream]="wrapper.stream" [interval]="animationTime" [active]="active"></stream-row>
+                </div>
+                <div class="stream-wrapper" *ngFor="let operation of operations; let i = index;">
+                    <span class="stream-name">res$:</span>
+                    <stream-row class="stream-row"[stream]="operation.stream" [active]="active" [interval]="animationTime"></stream-row>
+                    <div class="stream-code">
+                        <pre>{{operation.code}}</pre>
+                        <button class="btn btn-danger" (click)="removeOperation(operation)"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="new-operation">
+                <h3>Add a new operation</h3>
+                <p>
+                    Play around with the strams you just created, just remember the endresult to visualize is called res$
+                </p>
                 <codemirror [(ngModel)]="newOperation" [config]="codeMirrorConfig"></codemirror>
-                <button class="btn btn-primary" (click)="addOperation()">Add operation</button>
+                <br/>
+                <button class="btn btn-default" (click)="addOperation()"><i class="fa fa-plus-circle"></i>&nbsp;Add operation</button>
             </div>
         </div>
 `

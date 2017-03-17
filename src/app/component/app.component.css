@@ -1,0 +1,57 @@
+.app-wrapper, .app-wrapper-top {
+    display: flex;
+}
+.app-wrapper {
+    width:100%;
+    height: 100%;
+    flex-direction:column;
+}
+.app-wrapper-top{
+    width: 100%;
+    flex-direction: row
+}
+.app-wrapper-streams {
+    flex-direction: column;
+    flex: 1;
+    overflow-y:scroll;
+    position:relative;
+}
+.streams-ascii {
+    flex: 1;
+    background: #f1f1f1;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+}
+.streams-ascii textarea {
+    width: 100%;
+}
+.streams-settings {
+    padding: 10px;
+    background: #f1f1f1;
+}
+.stream-wrapper {
+    flex-direction: row;
+    display:flex;
+    align-items:center;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+}
+.stream-code {
+    padding: 10px;
+    background: #f1f1f1;
+    z-index:999;
+}
+
+.stream-row {
+    width: 100%;
+    display:flex;
+}
+.stream-name {
+    min-width: 100px;
+}
+.new-operation {
+    background: #337ab7;
+    padding: 20px;
+    color: #fff;
+    border-top: 1px solid #29578a;
+}
