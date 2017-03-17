@@ -1,10 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
 @import "../node_modules/font-awesome/css/font-awesome.css";
+
 .CodeMirror-scroll {
     height: auto;
 }
 
-body{
+body {
     font-family: monospace;
+}
+
+.marble {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    align-items: center;
+    justify-content: center;
+    background: #bb3b26;
+    display: flex;
+    color: #fff;
+    position: absolute;
+}
+
+.marble-label {
+
+}
+
+.marble-line {
+    height: 2px;
+    width: 0px;
+    background: #000;
+    display:flex;
+}
+.marble-diagram{
+    display:flex;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+}
+.marble-diagram-end {
+    position: absolute;
+}
+.end-stripe{
+    background: #000;
+    width: 2px;
+    height: 50px;
+    display: block;
+    margin-left: 30px;
 }

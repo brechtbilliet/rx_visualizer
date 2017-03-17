@@ -3,12 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './component/app.component';
 import { CodemirrorModule } from 'ng2-codemirror';
+import { StreamRowComponent } from './component/stream-row.component';
+import { StreamService } from './services/stream.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StreamRowComponent
   ],
   imports: [
     BrowserModule,
@@ -16,7 +19,7 @@ import { CodemirrorModule } from 'ng2-codemirror';
     CodemirrorModule,
     HttpModule
   ],
-  providers: [],
+  providers: [StreamService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
