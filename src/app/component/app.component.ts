@@ -32,26 +32,35 @@ import { StreamService } from '../services/stream.service';
                 </div>
                 <div class="stream-wrapper" *ngFor="let operation of operations; let i = index;">
                     <span class="stream-name">res$:</span>
-                    <stream-row class="stream-row"[stream]="operation.stream" [active]="active" [interval]="animationTime"></stream-row>
+                    <stream-row class="stream-row" [stream]="operation.stream" [active]="active"
+                                [interval]="animationTime"></stream-row>
                     <div class="stream-code">
                         <pre>{{operation.code}}</pre>
-                        <button class="btn btn-danger" (click)="removeOperation(operation)"><i class="fa fa-trash-o"></i></button>
+                        <button class="btn btn-danger" (click)="removeOperation(operation)"><i
+                                class="fa fa-trash-o"></i></button>
                     </div>
                 </div>
             </div>
             <div class="new-operation">
-                <h3>Add a new operation</h3>
-                <p>
-                    Play around with the strams you just created, just remember the endresult to visualize is called res$
-                </p>
-                <codemirror [(ngModel)]="newOperation" [config]="codeMirrorConfig"></codemirror>
-                <br/>
-                <button class="btn btn-default" (click)="addOperation()"><i class="fa fa-plus-circle"></i>&nbsp;Add operation</button>
+                <button class="btn" (click)="showNewOperation = !showNewOperation">toggle</button>
+                <div *ngIf="showNewOperation">
+                    <h3>Add a new operation</h3>
+                    <p>
+                        Play around with the strams you just created, just remember the endresult to visualize is called
+                        res$
+                    </p>
+                    <codemirror [(ngModel)]="newOperation" [config]="codeMirrorConfig"></codemirror>
+                    <br/>
+                    <button class="btn btn-default" (click)="addOperation()"><i class="fa fa-plus-circle"></i>&nbsp;Add
+                        operation
+                    </button>
+                </div>
             </div>
         </div>
-`
+    `
 })
 export class AppComponent {
+    showNewOperation = true;
     animationTime = 200;
     active = false;
     codeMirrorConfig = {
